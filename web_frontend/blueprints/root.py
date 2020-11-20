@@ -19,7 +19,6 @@ def root_get():
 @root_blueprint.route("/", methods=["POST"])
 def root_post():
     file = request.files['audio_file']
-    url = "Help we need url"
     text = microservices.transcribe(file, transcribe_server_url, "sphinx")
     translated = microservices.translate(text, url=translate_server_url, model_id=100)
     return render_template("root.html", text=translated.src, text_t=translated.tgt, score=translated.score)
