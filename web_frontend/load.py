@@ -6,5 +6,7 @@ application = Flask(__name__)
 application.register_blueprint(blueprints.root)
 application.debug=True
 
+
+
 if __name__ == "__main__":
-    application.run(debug=True)
+    application.run(debug=True,port=1200)
