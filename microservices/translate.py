@@ -31,7 +31,7 @@ class ModelIDNotFoundException(Exception):
         super().__init__(self.message)
 
 
-def translate_text(text: str, url: str, model_id) -> TranslatedObject:
+def translate(text: str, url: str, model_id) -> TranslatedObject:
 
     # assert type(text) == str, "Text has to be of type string"
     # assert type(url) == str, "Url has to be of type string"
