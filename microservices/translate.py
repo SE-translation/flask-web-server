@@ -8,12 +8,11 @@ mt_nl = MosesDetokenizer(lang='nl')
 
 class TranslatedObject:
     """Return object of translate_text"""
+
     def __init__(self, src, tgt, score):
         self.src = src
         self.tgt = tgt
         self.score = score
-
-
 
 
 class ModelIDNotFoundException(Exception):
@@ -24,7 +23,8 @@ class ModelIDNotFoundException(Exception):
         found_model_ids -- model ids that where found
         message -- the models that where found
     """
-    def __init__(self, model_id, found_model_ids:list) -> None:
+
+    def __init__(self, model_id, found_model_ids: list) -> None:
         self.model_id = model_id
         self.found_model_ids = found_model_ids
         self.message = f"Model id {self.model_id} was not found in the config file. The ids that where found are {found_model_ids}"
@@ -32,7 +32,7 @@ class ModelIDNotFoundException(Exception):
 
 
 def translate(text: str, url: str, model_id) -> TranslatedObject:
-
+    '''Makes a request to model server request should look like {"batch":[{"src":"How are you?","id": 100},{"src":"The country is failing!","id": 100}]} etc'''
     # assert type(text) == str, "Text has to be of type string"
     # assert type(url) == str, "Url has to be of type string"
 
@@ -40,9 +40,8 @@ def translate(text: str, url: str, model_id) -> TranslatedObject:
     # if model_id not in model_ids:
     #     raise ModelIDNotFoundException(model_id, model_ids)
     text = mt_en.tokenize(text, return_str=True)
-    url = f"{url}/translator/translate"
     headers = {"Content-Type": "application/json"}
-    data = [{"src": text, "id": model_id}]
+    data = {"batch": [{"src": text, "id": model_id}]}
     response = requests.post(url, json=data, headers=headers)
     translation = response.text
     jsn = json.loads(translation)
