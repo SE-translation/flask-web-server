@@ -1,5 +1,6 @@
-import requests
 import json
+
+import requests
 
 
 def transcribe(file, url: str, transcribe_method: str) -> str:

@@ -1,6 +1,7 @@
-from sacremoses import MosesTokenizer, MosesDetokenizer
-import requests
 import json
+
+import requests
+from sacremoses import MosesTokenizer, MosesDetokenizer
 
 mt_en = MosesTokenizer(lang='en')
 mt_nl = MosesDetokenizer(lang='nl')

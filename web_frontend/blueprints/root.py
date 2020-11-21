@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request
-from config import get_config
 
 import microservices
+from config import get_config
 
 root_blueprint = Blueprint('root', __name__)
 

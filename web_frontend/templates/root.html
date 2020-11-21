@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href='{{url_for("static", filename="bootstrap_dark.css")}}' rel="stylesheet">
+    <link href='{{ url_for("static", filename="bootstrap_dark.css") }}' rel="stylesheet">
     <meta charset="UTF-8">
     <title>Translate Audio files</title>
 </head>
@@ -13,12 +13,12 @@
             <p class="lead">Translate audio!</p>
         </div>
         {% with messages = get_flashed_messages(with_categories=true) %}
-        {% for category, message in messages %}
+            {% for category, message in messages %}
 
-        <div class="alert alert-dismissible fade show alert-{{ category }}"> {{ message }}
-            <button class="close" data-dismiss="alert" type="button">&times;</button>
-        </div>
-        {% endfor %}
+                <div class="alert alert-dismissible fade show alert-{{ category }}"> {{ message }}
+                    <button class="close" data-dismiss="alert" type="button">&times;</button>
+                </div>
+            {% endfor %}
         {% endwith %}
 
     </div>
@@ -43,20 +43,20 @@
     <div class="row ">
         <div class="col">
             <h3>Output from audio</h3>
-            <textarea class="form-control" readonly rows="7">{{text}}</textarea>
+            <textarea class="form-control" readonly rows="7">{{ text }}</textarea>
         </div>
 
         <div class="col">
             <div class="row mb-3">
-            <h3>Translated output</h3>
-            <textarea class="form-control" readonly rows="7">{{text_t}}</textarea>
+                <h3>Translated output</h3>
+                <textarea class="form-control" readonly rows="7">{{ text_t }}</textarea>
             </div>
             {% if score %}
-            <div class="row">
-                <p>Translation score: {{score}}</p>
-<!--                <label for="score">Translation score: </label>-->
-<!--                <input type="text" id="score" value="score" readonly>-->
-            </div>
+                <div class="row">
+                    <p>Translation score: {{ score }}</p>
+                    <!--                <label for="score">Translation score: </label>-->
+                    <!--                <input type="text" id="score" value="score" readonly>-->
+                </div>
             {% endif %}
         </div>
     </div>
