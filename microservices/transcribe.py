@@ -8,6 +8,5 @@ def transcribe(file, url: str, transcribe_method: str) -> str:
     data = {"method": transcribe_method}
     files = {"audio_file": file}
     response = requests.post(url, files=files, data=data)
-    print(response.text)
     text = json.loads(response.text)['text']
     return text
