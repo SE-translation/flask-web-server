@@ -1,1 +1,1 @@
-from .load import application
+from .load import application, app
