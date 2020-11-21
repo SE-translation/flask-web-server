@@ -1,9 +1,7 @@
-from web_frontend import application
+from web_frontend import application, app
 
-app = application
-application = application
-
+app
+application
 
 if __name__ == "__main__":
-
-    application.run(debug=True,port=1200)
+    application.run(debug=True, port=1200)
