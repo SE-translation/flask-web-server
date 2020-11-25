@@ -1,4 +1,4 @@
 {
-  "translate_server_url": "http://DESKTOP-NBG1D5R:5000",
+  "translate_server_url": "http://127.0.0.1:1600/translate",
   "transcribe_server_url": "http://127.0.0.1:5000/transcribe"
 }
