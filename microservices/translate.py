@@ -32,24 +32,34 @@ class ModelIDNotFoundException(Exception):
 
 
 def translate(text: str, url: str, model_id) -> TranslatedObject:
-    '''Makes a request to model server request should look like {"batch":[{"src":"How are you?","id": 100},{"src":"The country is failing!","id": 100}]} etc'''
+   '''Makes a request to model server request should look like {"batch":[{"src":"How are you?","id": 100},{"src":"The country is failing!","id": 100}]} etc'''
     # assert type(text) == str, "Text has to be of type string"
     # assert type(url) == str, "Url has to be of type string"
 
     # model_ids = get_valid_model_ids()
     # if model_id not in model_ids:
-    #     raise ModelIDNotFoundException(model_id, model_ids)
-    text = mt_en.tokenize(text, return_str=True)
-    headers = {"Content-Type": "application/json"}
-    data = {"batch": [{"src": text, "id": model_id}]}
-    response = requests.post(url, json=data, headers=headers)
-    translation = response.text
-    jsn = json.loads(translation)
+   
+  
+  #     raise ModelIDNotFoundException(model_id, model_ids)
+   print("starting the microservice translate")
+   try:
+       text = mt_en.tokenize(text, return_str=True)
+       headers = {"Content-Type": "application/json"}
+       
+       data = {"batch": [{"src": text, "id": model_id}]}
+       
+       response = requests.post(url, json=data, headers=headers)
+       translation = response.text
+       jsn = json.loads(translation)
+    
+       tokens = jsn[0][0]['tgt']
+       input_text = jsn[0][0]['src']
+       score = jsn[0][0]['pred_score']
+      # text = re.sub(r" ([?.!,:،؛؟¿])", r"\1", text)
+       #text = mt_nl.detokenize(tokens)
+       text = tokens
+       return TranslatedObject(input_text, text, score)
+   except Exception as e:
+       e = str(e)   
+       return TranslatedObject(e, e, 9)
 
-    tokens = jsn[0][0]['tgt']
-    input_text = jsn[0][0]['src']
-    score = jsn[0][0]['pred_score']
-    # text = re.sub(r" ([?.!,:،؛؟¿])", r"\1", text)
-    # text = mt_nl.detokenize(tokens)
-    text = tokens
-    return TranslatedObject(input_text, text, score)
