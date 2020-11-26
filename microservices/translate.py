@@ -41,7 +41,6 @@ def translate(text: str, url: str, model_id) -> TranslatedObject:
    
   
   #     raise ModelIDNotFoundException(model_id, model_ids)
-   print("starting the microservice translate")
    try:
        text = mt_en.tokenize(text, return_str=True)
        headers = {"Content-Type": "application/json"}
