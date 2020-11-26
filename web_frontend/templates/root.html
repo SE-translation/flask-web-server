@@ -31,13 +31,19 @@
 
             <h3 class="mb-3">Input the audio file</h3>
 
-            <form action="." class="" enctype="multipart/form-data" method="post">          
-                 
-                  <div class="mb-2">
+            <form action="." class="" enctype="multipart/form-data" method="post" id="mainform">
+
+                <div class="mb-3">
                     <label for="audio_file">Audio file:</label>
-                    <input id="audio_file" name="audio_file" accept=".wav,.aiff,.aiff-c,.flac,.txt" required type="file" class="form-control-file">
-                  </div>
-                  <br><br>
+                    <input id="audio_file" name="audio_file" accept=".wav,.aiff,.aiff-c,.flac,.txt" type="file" class="form-control-file">
+                </div>
+
+                <input id="a" value="file" type="radio" name="input_type">
+                <label for="a">Take input from uploaded file</label>
+                <br>
+                <input id="b" value="field" type="radio" name="input_type">
+                <label for="b">Take input from audio output field</label>
+                <br><br>
                 <input type="submit" value="Submit">
             </form>
 
@@ -46,16 +52,17 @@
     <div class="row ">
         <div class="col">
             <h3>Output from audio</h3>
-            <textarea class="form-control" readonly rows="7">{{text}}</textarea>
+            <textarea class="form-control mb-3" form="mainform" name="text-input-output" rows="7">{{ text }}</textarea>
+
         </div>
 
         <div class="col">
             <div class="row mb-3">
-            <h3>Translated output</h3>
-            <textarea class="form-control" readonly rows="7">{{text_t}}</textarea>
+                <h3>Translated output</h3>
+                <textarea class="form-control" readonly rows="7">{{ text_t }}</textarea>
             </div>
             {% if score %}
-            <div class="row">
+                <div class="row">
                 <p>Translation score: {{score}}</p>
 <!--                <label for="score">Translation score: </label>-->
 <!--                <input type="text" id="score" value="score" readonly>-->
